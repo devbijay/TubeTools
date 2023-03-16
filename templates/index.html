@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Landing Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+
   </head>
   <body>
 
@@ -58,7 +59,7 @@
     <div class="col-md-6 my-2" id="card1">
       <div class="text-center">
       <h5>HD Image (1280x720)</h5>
-      <button class="card-title">Download HD Thumbnail</button>
+      <button class="card-title" id="hd_img_btn">Download HD Thumbnail</button>
       </div>
       <div class="card">
         <img class="card-img-top" id="hd_img" src="image1.jpg" alt="Card image cap" width="640" height="360">
@@ -68,7 +69,7 @@
     <div class="col-md-6 my-2" id="card2">
       <div class="text-center">
       <h5>SD Image (640x480)</h5>
-      <button class="card-title">Download SD Thumbnail</button>
+      <button class="card-title" id="sd_img_btn">Download SD Thumbnail</button>
       </div>
       <div class="card">
         <img class="card-img-top" id="sd_img" src="image1.jpg" alt="Card image cap" width="500" height="400">
@@ -78,7 +79,7 @@
     <div class="col-md-4 my-2" id="card3">
       <div class="text-center">
       <h5>Normal Image (480x360)</h5>
-      <button type="button">Download (480x360)</button>
+      <button type="button" id="normal_img_btn">Download (480x360)</button>
       </div>
       <div class="card">
         <img class="card-img-top" id="normal_img1" src="image1.jpg" alt="Card image cap" width="400" height="350">
@@ -88,7 +89,7 @@
     <div class="col-md-4 my-2" id="card4">
       <div class="text-center">
       <h5>Normal Image (320x180)</h5>
-      <button class="card-title">Download Normal Img</button>
+      <button class="card-title" id="normal2_img_btn">Download Normal Img</button>
       </div>
       <div class="card">
         <img class="card-img-top" id="normal_img2" src="image1.jpg" alt="Card image cap" width="400" height="350">
@@ -98,7 +99,7 @@
     <div class="col-md-4 my-2" id="card5">
       <div class="text-center">
       <h5>Normal Image (120x90)</h5>
-      <button class="card-title">Download Img</button>
+      <button class="card-title" id="normal3_img_btn">Download Img</button>
       </div>
       <div class="card">
         <img class="card-img-top" id="normal_img3" src="image1.jpg" alt="Card image cap" width="400" height="350">
@@ -115,41 +116,7 @@
 
     <footer>
       <!-- Your footer content goes here -->
-      <script>
-  window.onload = function() {
-
-
-    search_btn.addEventListener("click", function() {
-
-    var yt_url = document.getElementById("yt_url").value;
-    const div_el = document.getElementById("show_yt_img");
-    const search_btn = document.getElementById("search_btn");
-    hd_img = document.getElementById("hd_img");
-    sd_img = document.getElementById("sd_img");
-    normal_img1 = document.getElementById("normal_img1");
-    normal_img2 = document.getElementById("normal_img2");
-    normal_img3 = document.getElementById("normal_img3");
-
-    const res = yt_url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-    if (res == undefined) {
-      alert("Please check the URL you have entered");
-    }
-    const videoId = res[1];
-    console.log(videoId);
-    base_url = "https://img.youtube.com/vi/"
-
-    hd_img.src = base_url + videoId+"/maxresdefault.jpg"
-    sd_img.src = base_url + videoId+"/sddefault.jpg"
-    normal_img1.src = base_url + videoId+"/hqdefault.jpg"
-    normal_img2.src = base_url + videoId+"/mqdefault.jpg"
-    normal_img3.src = base_url + videoId+"/default.jpg"
-
-    div_el.classList.remove("d-none");
-  });
-
-  }
-</script>
-
+      <script src="/static/script.js"></script>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
