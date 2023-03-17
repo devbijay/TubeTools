@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Landing Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+
+  </head>
+  <body>
+
+<header >
+  <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
+    <div class="container justify-content-center">
+      <a class="navbar-brand" href="#">
+        <img src="/static/TubeTool.svg" width="150" height="50" alt="Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Menu Link 1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Menu Link 2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Menu Link 3</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+
+
+<main>
+
+  <div class="container d-flex justify-content-center align-items-center" style="height: 50vh; max-width: 1920px;">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h1>Youtube Thumbnail Downloader</h1>
+        <p>Please Enter The YouTube Link</p>
+        <form class="d-flex" action="#">
+          <input class="form-control me-2" id="yt_url" type="search" placeholder="Search" aria-label="Search" required>
+          <button class="btn btn-outline-success" id="search_btn" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<div class="container justify-content-center align-items-center d-none" id="show_yt_img">
+  <div class="row">
+
+    <div class="col-md-6 my-2" id="card1">
+      <div class="text-center">
+      <h5>HD Image (1280x720)</h5>
+      <button class="card-title" id="hd_img_btn">Download HD Thumbnail</button>
+      </div>
+      <div class="card">
+        <img class="card-img-top" id="hd_img" src="image1.jpg" alt="Card image cap" width="640" height="360">
+      </div>
+    </div>
+
+    <div class="col-md-6 my-2" id="card2">
+      <div class="text-center">
+      <h5>SD Image (640x480)</h5>
+      <button class="card-title" id="sd_img_btn">Download SD Thumbnail</button>
+      </div>
+      <div class="card">
+        <img class="card-img-top" id="sd_img" src="image1.jpg" alt="Card image cap" width="500" height="400">
+      </div>
+    </div>
+
+    <div class="col-md-4 my-2" id="card3">
+      <div class="text-center">
+      <h5>Normal Image (480x360)</h5>
+      <button type="button" id="normal_img_btn">Download (480x360)</button>
+      </div>
+      <div class="card">
+        <img class="card-img-top" id="normal_img1" src="image1.jpg" alt="Card image cap" width="400" height="350">
+      </div>
+    </div>
+
+    <div class="col-md-4 my-2" id="card4">
+      <div class="text-center">
+      <h5>Normal Image (320x180)</h5>
+      <button class="card-title" id="normal2_img_btn">Download Normal Img</button>
+      </div>
+      <div class="card">
+        <img class="card-img-top" id="normal_img2" src="image1.jpg" alt="Card image cap" width="400" height="350">
+      </div>
+    </div>
+
+    <div class="col-md-4 my-2" id="card5">
+      <div class="text-center">
+      <h5>Normal Image (120x90)</h5>
+      <button class="card-title" id="normal3_img_btn">Download Img</button>
+      </div>
+      <div class="card">
+        <img class="card-img-top" id="normal_img3" src="image1.jpg" alt="Card image cap" width="400" height="350">
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+</main>
+
+
+    <footer>
+      <!-- Your footer content goes here -->
+      <script src="/static/script.js"></script>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+  </body>
+</html>
