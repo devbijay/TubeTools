@@ -47,7 +47,7 @@ div_el.classList.remove("d-none");
   function downloadImage(url) {
   // const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
   const imageUrl = url;
-  fetch(imageUrl)
+  fetch(imageUrl, {headers: {'Access-Control-Allow-Origin': '*'}})
     .then(response => response.blob())
     .then(blob => {
       const url = URL.createObjectURL(blob);
