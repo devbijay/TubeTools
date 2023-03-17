@@ -41,23 +41,21 @@ normal2_img_btn.setAttribute('onclick', 'downloadImage("' + normal_img2.src + '"
 normal_img3.src = base_url + videoId+"/default.jpg"
 normal3_img_btn.setAttribute('onclick', 'downloadImage("' + normal_img3.src + '")');
 
-
-
 div_el.classList.remove("d-none");
 });
 
   function downloadImage(url) {
-  const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-  const imageUrl = proxyUrl + url;
+  // const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+  const imageUrl = url;
   fetch(imageUrl)
     .then(response => response.blob())
     .then(blob => {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
+      a.style.display = 'none';
       a.href = url;
       a.download = 'image.jpg';
       a.click();
-      URL.revokeObjectURL(url);
     });
 }
 
