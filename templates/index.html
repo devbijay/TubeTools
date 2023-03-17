@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Landing Page</title>
+    <title>TubeTools: Youtube Thumbnail Downloader</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
 
   </head>
@@ -40,49 +40,48 @@
 
 <main>
 
-  <div class="container d-flex justify-content-center align-items-center" style="height: 50vh; max-width: 1920px;">
+  <div class="container d-flex justify-content-center align-items-center" style="height: 30vh; max-width: 1920px;">
     <div class="row">
       <div class="col-md-12 text-center">
         <h1>Youtube Thumbnail Downloader</h1>
         <p>Please Enter The YouTube Link</p>
-        <form class="d-flex" action="#">
+        <div class="d-flex">
           <input class="form-control me-2" id="yt_url" type="search" placeholder="Search" aria-label="Search" required>
           <button class="btn btn-outline-success" id="search_btn" type="submit">Search</button>
-        </form>
+        </div>
       </div>
     </div>
   </div>
 
 <div class="container justify-content-center align-items-center d-none" id="show_yt_img">
   <div class="row">
-
-    <div class="col-md-6 my-2" id="card1">
+    <div class="col-md-7 my-2" id="card1">
       <div class="text-center">
       <h5>HD Image (1280x720)</h5>
       <button class="card-title" id="hd_img_btn">Download HD Thumbnail</button>
       </div>
       <div class="card">
-        <img class="card-img-top" id="hd_img" src="/static/TubeTool.svg" alt="Card image cap" width="640" height="360">
+        <img class="img-fluid w-1280 h-720" id="hd_img" src="/static/TubeTool.svg" alt="Card image cap">
       </div>
     </div>
 
-    <div class="col-md-6 my-2" id="card2">
+    <div class="col-md-5 my-2" id="card2">
       <div class="text-center">
       <h5>SD Image (640x480)</h5>
       <button class="card-title" id="sd_img_btn">Download SD Thumbnail</button>
       </div>
       <div class="card">
-        <img class="card-img-top" id="sd_img" src="/static/TubeTool.svg" alt="Card image cap" width="500" height="400">
+        <img class="img-fluid w-640 h-480" id="sd_img" src="/static/TubeTool.svg" alt="Card image cap">
       </div>
     </div>
 
-    <div class="col-md-4 my-2" id="card3">
+    <div class="col-md-5 my-2" id="card3">
       <div class="text-center">
       <h5>Normal Image (480x360)</h5>
       <button type="button" id="normal_img_btn">Download (480x360)</button>
       </div>
       <div class="card">
-        <img class="card-img-top" id="normal_img1" src="/static/TubeTool.svg" alt="Card image cap" width="400" height="350">
+        <img class="img-fluid w-480 h-360" id="normal_img1" src="/static/TubeTool.svg" alt="Card image cap">
       </div>
     </div>
 
@@ -92,17 +91,17 @@
       <button class="card-title" id="normal2_img_btn">Download Normal Img</button>
       </div>
       <div class="card">
-        <img class="card-img-top" id="normal_img2" src="/static/TubeTool.svg" alt="Card image cap" width="400" height="350">
+        <img class="img-fluid w-320 h-180" id="normal_img2" src="/static/TubeTool.svg" alt="Card image cap">
       </div>
     </div>
 
-    <div class="col-md-4 my-2" id="card5">
+    <div class="col-md-3 my-2" id="card5">
       <div class="text-center">
       <h5>Normal Image (120x90)</h5>
       <button class="card-title" id="normal3_img_btn">Download Img</button>
       </div>
       <div class="card">
-        <img class="card-img-top" id="normal_img3" src="/static/TubeTool.svg" alt="Card image cap" width="400" height="350">
+        <img class="img-fluid w-120 h-90" id="normal_img3" src="/static/TubeTool.svg" alt="Card image cap">
       </div>
     </div>
 

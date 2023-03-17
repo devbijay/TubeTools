@@ -45,17 +45,6 @@ div_el.classList.remove("d-none");
 });
 
   function downloadImage(url) {
-  // const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-  const imageUrl = url;
-  fetch(imageUrl, {headers: {'Access-Control-Allow-Origin': '*'}})
-    .then(response => response.blob())
-    .then(blob => {
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.style.display = 'none';
-      a.href = url;
-      a.download = 'image.jpg';
-      a.click();
-    });
+    window.location.href = '/?url=' + encodeURIComponent(url);
 }
 
