@@ -1,3 +1,4 @@
+const search_btn = document.getElementById("search_btn");
 search_btn.addEventListener("click", function() {
 
 var yt_url = document.getElementById("yt_url").value;
@@ -43,6 +44,9 @@ normal3_img_btn.setAttribute('onclick', 'downloadImage("' + normal_img3.src + '"
 
 div_el.classList.remove("d-none");
 });
+
+
+
 
   function downloadImage(url) {
     window.location.href = '/?url=' + encodeURIComponent(url);
