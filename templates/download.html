@@ -23,10 +23,13 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link"  href="{{url_for('thumbnail.landing')}}">Thumbanail Download</a>
+            <a class="nav-link"  href="{{url_for('thumbnail.landing')}}">Thumbnail Download</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="{{url_for('download.audio')}}">Audio Download</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('download.video')}}">Video Download</a>
           </li>
         </ul>
       </div>
@@ -48,60 +51,60 @@
   </div>
 
   <script>
-    const search_audio_btn = document.getElementById("search_audio_btn");
+const search_audio_btn = document.getElementById("search_audio_btn");
 search_audio_btn.addEventListener("click", function() {
-event.preventDefault();
+	event.preventDefault();
 
-const yt_url = document.getElementById("yt_url").value;
-const downloadBtn = document.getElementById("download_btn");
-const downloadSuccessBtn = document.getElementById("download_btn_success");
-const youtubeVideo = document.getElementById("youtube-video");
-
-
-const res = yt_url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-if (res == undefined) {
-  alert("Please check the URL you have entered");
-}
-const videoId = res[1];
-console.log(videoId)
-const payload = {
-    video_id: videoId
-  };
-  youtubeVideo.src = `https://www.youtube.com/embed/${videoId}`;
-  downloadSuccessBtn.classList.remove("d-none");
-  search_audio_btn.disabled = true;
-  search_audio_btn.innerHTML = '<span class="spinner-border text-warning" role="status" aria-hidden="true"></span> Loading';
-  downloadSuccessBtn.classList.add("d-none");
-  downloadBtn.removeAttribute("href");
+	const yt_url = document.getElementById("yt_url").value;
+	const downloadBtn = document.getElementById("download_btn");
+	const downloadSuccessBtn = document.getElementById("download_btn_success");
+	const youtubeVideo = document.getElementById("youtube-video");
 
 
-  // Make the POST request
-  fetch("{{url_for('download.audio')}}", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(payload)
-  })
-  .then(response => {
-    if (response.ok) {
-    return response.json();
-    } else {
-      console.error("Error downloading audio:", response.status);
-    }
-  })
-  .then(data => {
-   search_audio_btn.disabled = false;
-   search_audio_btn.innerHTML = "⬇️ Audio";
-   downloadBtn.setAttribute("href", data.url);
-   downloadBtn.innerHTML = `️🖐👉Download✅ (${data.size} MB)`;
-   downloadSuccessBtn.classList.remove("d-none");
+	const res = yt_url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
+	if (res == undefined) {
+		alert("Please check the URL you have entered");
+	}
+	const videoId = res[1];
+	console.log(videoId)
+	const payload = {
+		video_id: videoId
+	};
+	youtubeVideo.src = `https://www.youtube.com/embed/${videoId}`;
+	downloadSuccessBtn.classList.remove("d-none");
+	search_audio_btn.disabled = true;
+	search_audio_btn.innerHTML = '<span class="spinner-border text-warning" role="status" aria-hidden="true"></span> Loading';
+	downloadSuccessBtn.classList.add("d-none");
+	downloadBtn.removeAttribute("href");
 
 
-  })
-  .catch(error => {
-    console.error("Error downloading audio:", error);
-  });
+	// Make the POST request
+	fetch("{{url_for('download.audio')}}", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(payload)
+		})
+		.then(response => {
+			if (response.ok) {
+				return response.json();
+			} else {
+				console.error("Error downloading audio:", response.status);
+			}
+		})
+		.then(data => {
+			search_audio_btn.disabled = false;
+			search_audio_btn.innerHTML = "⬇️ Audio";
+			downloadBtn.setAttribute("href", data.url);
+			downloadBtn.innerHTML = `️🖐👉Download✅ (${data.size} MB)`;
+			downloadSuccessBtn.classList.remove("d-none");
+
+
+		})
+		.catch(error => {
+			console.error("Error downloading audio:", error);
+		});
 
 });
   </script>
