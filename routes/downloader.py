@@ -10,9 +10,8 @@ def audio():
     if request.method == "POST":
         payload = request.get_json()
         if video_id := payload.get("video_id"):
-            print(video_id)
-            yt = YouTube(f"https://youtube.com/watch?v={video_id}")
+            yt = YouTube(url=f"https://youtube.com/watch?v={video_id}", use_oauth=False, allow_oauth_cache=True)
+            yt.bypass_age_gate()
             audio_stream = yt.streams.filter(only_audio=True).first()
-            return jsonify({"url": audio_stream.url})
-
+            return jsonify({"url": audio_stream.url, "size": audio_stream.filesize_mb})
     return render_template("download.html")
