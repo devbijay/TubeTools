@@ -22,18 +22,33 @@ def video():
     if request.method == "POST":
         payload = request.get_json()
         if video_id := payload.get("video_id"):
-            yt = YouTube(url=f"https://youtube.com/watch?v={video_id}", use_oauth=False, allow_oauth_cache=True)
+            yt = YouTube(url=f"https://youtube.com/watch?v={video_id}")
             yt.bypass_age_gate()
-            video_streams = yt.streams
-            video_streams = [streams for streams in video_streams
+            video_streams_list = yt.streams
+
+            #Process Streams With Audio
+            av_streams = [streams for streams in video_streams_list
                              if (streams.includes_video_track and streams.includes_audio_track)]
-            video_streams = video_streams[::-1]  # Reversing To Get Highest To The Lowest resolution
-            video_dict = []
-            for stream in video_streams:
+            av_streams = av_streams[::-1]  # Reversing To Get Highest To The Lowest resolution
+
+            # Process Streams Without Audio
+            only_vid_streams = [streams for streams in video_streams_list
+                                if streams.includes_video_track and not streams.includes_audio_track]
+
+            with_audio, no_audio= [], []
+            for stream in av_streams:
                 video_data = {"res": stream.resolution,
                               "size": f"{stream.filesize / (1024 * 1024):.2f} MB",
                               "url": stream.url}
-                video_dict.append(video_data)
+                with_audio.append(video_data)
+
+            for stream in only_vid_streams:
+                video_data = {"res": stream.resolution,
+                              "size": f"{stream.filesize / (1024 * 1024):.2f} MB",
+                              "url": stream.url}
+                no_audio.append(video_data)
+            video_dict = {"av": with_audio, "ov": no_audio}
+            print(video_dict)
             return jsonify(video_dict)
 
     return render_template("download_video.html")
