@@ -60,13 +60,18 @@
 
   <script>
 const search_video_btn = document.getElementById("search_video_btn");
+
 search_video_btn.addEventListener("click", function() {
 	event.preventDefault();
 
+    const video_div = document.getElementById("video_div");
 	const yt_url = document.getElementById("yt_url").value;
 	const youtubeVideo = document.getElementById("youtube-video");
-	const downloadSection = document.getElementById('download_video_section');
-
+    const tableBody = document.getElementById('tableBody');
+    const tableBody_no_audio = document.getElementById('tableBody_no_audio');
+    tableBody.innerHTML = ""
+    tableBody_no_audio.innerHTML = ""
+    video_div.classList.add("d-none")
 
 	const res = yt_url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
 	if (res == undefined) {
@@ -80,14 +85,10 @@ search_video_btn.addEventListener("click", function() {
 	youtubeVideo.src = `https://www.youtube.com/embed/${videoId}`;
 	search_video_btn.disabled = true;
 	search_video_btn.innerHTML = '<span class="spinner-border text-warning" role="status" aria-hidden="true"></span> Loading';
-    downloadSection.innerHTML = '';
 
-	// Make the POST request
 	fetch("{{url_for('download.video')}}", {
 			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
+			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify(payload)
 		})
 		.then(response => {
@@ -98,9 +99,13 @@ search_video_btn.addEventListener("click", function() {
 			}
 		})
 		.then(data => {
+		    const av = data.av
+		    const ov = data.ov
 			search_video_btn.disabled = false;
 			search_video_btn.innerHTML = "⬇Video";
-			createElements(data);
+			createElements(av, tableBody);
+			createElements(ov, tableBody_no_audio);
+			video_div.classList.remove('d-none');
 		})
 		.catch(error => {
 			console.error("Error downloading audio:", error);
@@ -108,25 +113,27 @@ search_video_btn.addEventListener("click", function() {
 
 });
 
-function createElements(data) {
-      const downloadVideoSection = document.getElementById('download_video_section');
+function createElements(data, tableBody) {
       data.forEach(item => {
-        const div = document.createElement('div');
-        div.classList.add('flex-container', 'my-2');
+      const tr = document.createElement("tr");
+      const td1 = document.createElement("td");
+      td1.textContent = item.res;
 
-        const paragraph = document.createElement('p');
-        paragraph.classList.add('mx-2');
-        paragraph.textContent = `Resolution: ${item.res}, Download Size: ${item.size}`;
+      const td2 = document.createElement("td");
+      td2.textContent = item.size;
+      const td3 = document.createElement("td");
+      const button = document.createElement("button");
+      button.classList.add("btn", "btn-success", "btn-sm");
+      button.textContent = "Download";
+      button.onclick = function() {
+        myFunction(item.url);
+      };
 
-        const button = document.createElement('button');
-        button.classList.add('btn', 'btn-success', 'btn-sm');
-        button.textContent = "Download";
-        button.onclick = button.onclick = function() {
-                          myFunction(item.url);
-                        };
-        div.appendChild(paragraph);
-        div.appendChild(button);
-        downloadVideoSection.appendChild(div);
+      td3.appendChild(button);
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+      tableBody.appendChild(tr);
       });
     }
 
@@ -138,17 +145,60 @@ function createElements(data) {
 
 <div class="container justify-content-center align-items-center" id="show_yt_audio">
   <div class="row">
-
     <div class="d-flex justify-content-center align-items-center video-container my-3">
   <iframe id="youtube-video" width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube" allowfullscreen></iframe>
 </div>
+
+<div id="video_div" class="d-none">
 <div class="card">
-    <div id="download_video_section" class="card-body">
-    </div>
+  <h5 class="card-header text-center">Video With Audio✅🎵</h5>
+  <div class="container-sm text-center" style="max-width: 600px;">
+<div class="card">
+  <div class="table-responsive">
+    <table class="table table-hover table-sm table-striped">
+  <thead>
+    <tr>
+      <th>Resolution</th>
+      <th>Size</th>
+      <th>Download</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody">
+  </tbody>
+</table>
+  </div>
+</div>
+</div>
+</div>
+<div class="card my-3">
+  <h5 class="card-header text-center">Video With No Audio❌🎵</h5>
+  <div class="container-sm text-center" style="max-width: 600px;">
+<div class="card">
+  <div class="table-responsive">
+    <table class="table table-hover table-sm table-striped">
+  <thead>
+    <tr>
+      <th>Resolution</th>
+      <th>Size</th>
+      <th>Download</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody_no_audio">
+  </tbody>
+</table>
+  </div>
+</div>
+</div>
+</div>
 </div>
 
 
 </div>
+
+</div>
+
+
+
 
 </div>
 
